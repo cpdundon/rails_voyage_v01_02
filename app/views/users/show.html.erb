@@ -1,0 +1,14 @@
+<h1>User: <%= @user.name %></h1>
+<p>  Your roles are below:
+	<ul>
+		<% @roles.each do |role| %>
+			<li><%= role.name %></li>
+		<% end %>
+	</ul>
+</p>
+<p>
+	Active? -- <%= @user.active ? 'Yes' : 'No' %>
+</p>
+<%= link_to "New User", new_user_path %> | 
+<%= link_to "Edit User", edit_user_path(@user) %> | 
+<%= link_to "User List",  users_path%>
