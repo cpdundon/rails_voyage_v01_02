@@ -11,10 +11,13 @@ class UsersController < ApplicationController
   end
 
   def create
-		binding.pry
     user = User.create(user_params)
     redirect_to user_path(user)
   end
+
+	def edit
+		@user = User.find_by(id: params[:id])
+	end
 
 private
   def user_params
