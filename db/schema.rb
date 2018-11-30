@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_27_210711) do
+ActiveRecord::Schema.define(version: 2018_11_30_021130) do
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
@@ -37,6 +37,23 @@ ActiveRecord::Schema.define(version: 2018_11_27_210711) do
     t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
     t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
+  create_table "vessels", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "voyages", force: :cascade do |t|
+    t.integer "skipper_id"
+    t.integer "vessel_id"
+    t.text "crew"
+    t.text "damage_report"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "voyage_date"
   end
 
 end

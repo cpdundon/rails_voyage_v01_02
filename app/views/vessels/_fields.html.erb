@@ -1,0 +1,6 @@
+<%= form_for vessel do |f| %>
+	<%= link_to "Vessels List",  vessels_path %><br></br>
+	Vessel Name: <%= f.text_field :name %><br></br>
+  Active? <%= f.check_box :active, checked: vessel.new_record? || f.object.active? %><br></br>
+	<%= f.submit %>
+<% end %>

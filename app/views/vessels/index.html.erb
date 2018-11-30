@@ -1,0 +1,7 @@
+<h1>Vessel Index</h1>
+<%= link_to "New Vessel", new_vessel_path %>
+<ul>
+	<% @vessels.each do |vessel| %>
+		<li><%= link_to vessel.name, edit_vessel_path(vessel) %></li>
+	<% end %>
+</ul>

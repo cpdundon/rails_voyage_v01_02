@@ -1,0 +1,10 @@
+<h1>Skipper ID: <%= voyage.skipper.name %></h1>
+<%= form_for voyage do |f| %>
+	Voyage Date: <%= f.date_field :voyage_date %><br></br>
+  Crew: <%= f.text_field :crew %><br></br>
+  Damage Report: <%= f.text_field :damage_report %><br></br>
+	Vessel Select: <br></br>
+	<%= f.select :vessel_id, Vessel.all.collect { |p| [ p.name, p.id ] }, {include_blank: false}, {multiple: false} %><br></br> 
+	<%= f.submit %>
+<% end %>
+

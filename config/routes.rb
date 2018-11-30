@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   post '/signin' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
   resources :users, only: [:index, :new, :create, :show, :edit, :update]
+  resources :vessels, only: [:index, :new, :create, :show, :edit, :update]
+	resources :voyages
 end
