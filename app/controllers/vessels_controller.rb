@@ -1,4 +1,7 @@
 class VesselsController < ApplicationController
+  before_action :require_admin , only: [:new, :create, :update, :edit]
+  before_action :require_login, only: [:show, :index]
+
   def show
     @vessel = Vessel.find_by(id: params[:id])
   end

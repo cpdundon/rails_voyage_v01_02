@@ -12,6 +12,6 @@
   <body>
     <%= yield %>
 		<br></br>
-		<%= link_to "Log Out", logout_path, {method: :post} %>
+		<%= logged_in? ? "#{hot_user.name}: " : "" %><%= link_to "Log Out", logout_path, {method: :post} %>
   </body>
 </html>

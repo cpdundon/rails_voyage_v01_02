@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	before_action :require_admin
+
   def show
     @user = User.find_by(id: params[:id])
     @roles = @user.roles.all
@@ -11,8 +13,15 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
-    redirect_to user_path(user)
+    user = User.new(user_params)
+
+		if user.valid?
+			user.save
+			redirect_to user_path(user)
+		else
+			flash[:error] = "You must use a unique user name."
+			redirect_to new_user_path 
+		end
   end
 
 	def edit
@@ -21,12 +30,14 @@ class UsersController < ApplicationController
 
 	def update
 		user = User.find_by(id: params[:id])
+		
 		succeed = user.update(user_params)
 		
 		if succeed
 			redirect_to user_path(user)
 		else
-			redirect_to users_path
+			flash[:error] = "You must use a unique user name."	
+			redirect_to edit_user_path(user)
 		end
 	end
 

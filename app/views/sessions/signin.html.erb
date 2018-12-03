@@ -1,4 +1,8 @@
 <h1>Enter Your User ID and Password</h1>
+<% if flash[:error] %>
+    <div class="error"><h2><%= flash[:error] %></h2></div>
+<% end %>
+
 <%= form_for :user, url: '/signin' do |f| %>
 	Username: <%= f.select :name, User.all.collect { |u| u.name } %><br></br>
   Password: <%= f.password_field :password, value: 'password' %><br></br>

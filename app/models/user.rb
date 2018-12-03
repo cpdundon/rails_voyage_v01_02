@@ -2,8 +2,11 @@ class User < ApplicationRecord
   rolify
 	has_many :voyages, foreign_key: :skipper_id
 	has_many :vessels, through: :voyages
-
 	has_secure_password
+
+	validates :name, presence: true
+	validates :name, uniqueness: true
+	validates :name, uniqueness: { case_sensitive: false }
 
   after_create :assign_default_role
 

@@ -1,7 +1,13 @@
 <h1>Voyage Index</h1>
+<% if flash[:error] %>
+    <div class="error"><%= flash[:error] %></div>
+<% end %>
 <%= link_to "New Voyage", new_voyage_path %>
 <ul>
 	<% @voyages.each do |voyage| %>
-		<li><%= link_to "Edit #{voyage.skipper.name} - #{voyage.voyage_date}", edit_voyage_path(voyage) %> | <%= link_to 'View / Delete', voyage_path(voyage)  %></li>
+		<li><%= link_to "Edit #{voyage.skipper.name} - #{voyage.voyage_date}", edit_voyage_path(voyage) %>
+			<%= ' | ' %>
+			<%= link_to 'View / Delete', voyage_path(voyage)  %>
+		</li>
 	<% end %>
 </ul>

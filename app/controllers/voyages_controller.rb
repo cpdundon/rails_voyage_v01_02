@@ -1,11 +1,13 @@
 class VoyagesController < ApplicationController
+  before_action :require_voyage, only: [:new, :create, :update, :edit, :show, :destroy]
+  before_action :require_login, only: [:index]
+
   def show
     @voyage = Voyage.find_by(id: params[:id])
   end
 
   def new
 		@voyage = helpers.hot_user.voyages.new
-		#@voyage.skipper = helpers.hot_user
   end
 
   def create
@@ -32,7 +34,8 @@ class VoyagesController < ApplicationController
   end
 
   def index
-    @voyages = Voyage.all
+		redirect_to root_path if !logged_in?
+    @voyages = Voyage.skipper_voyages(hot_user)
   end
 
 	def destroy
@@ -43,5 +46,14 @@ class VoyagesController < ApplicationController
 private
   def voyage_params
     params.require(:voyage).permit(:voyage_date, :crew, :damage_report, :vessel_id)
+  end
+
+  def require_voyage
+		voyage = Voyage.find_by(id: params[:id])
+		
+		unless (voyage.skipper_id == hot_user.id if voyage) || admin?
+      flash[:error] = "You are not an admin.  You can only view your own voyage details."
+      redirect_to voyages_path
+    end
   end
 end
