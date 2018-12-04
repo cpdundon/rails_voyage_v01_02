@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
 	def create
 		
-		if user_params[:name]
+		if params[:user]
 			regular_login
 		else
 			facebook_login
@@ -51,19 +51,23 @@ private
 	end
 
 	def facebook_login
+
 		@user = User.find_or_create_by(uid: auth['uid']) do |u|
-      u.name = auth['info']['name']
+      u.name = auth['info']['email'] #auth['info']['name']
       u.email = auth['info']['email']
     end
-
-		flash[:error] = "Your account is not active - please see an administrator."
-		redirect_to signin_path
-				
-    session[:user_id] = @user.id
-
-		if admin?
+		
+		@user.password = ENV['FACEBOOK_SECRET'] unless @user.id
+		@user.save
+	
+		if !@user.active
+			flash[:error] = "Your account is not active - please see an administrator."
+			redirect_to signin_path
+		elsif admin?
+			session[:user_id] = @user.id
 			redirect_to user_path(user)
 		else
+			session[:user_id] = @user.id	
 			redirect_to voyages_path
 		end
   end

@@ -1,6 +1,6 @@
 class VoyagesController < ApplicationController
-  before_action :require_voyage, only: [:new, :create, :update, :edit, :show, :destroy]
-  before_action :require_login, only: [:index]
+  before_action :require_voyage, only: [:update, :edit, :show, :destroy]
+  before_action :require_login, only: [:index, :new, :create]
 
   def show
     @voyage = Voyage.find_by(id: params[:id])
