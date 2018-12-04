@@ -7,6 +7,7 @@ class VoyagesController < ApplicationController
   end
 
   def new
+		@vessel = Vessel.find_by(id: params[:vessel_id])
 		@voyage = helpers.hot_user.voyages.new
   end
 
@@ -35,7 +36,13 @@ class VoyagesController < ApplicationController
 
   def index
 		redirect_to root_path if !logged_in?
-    @voyages = Voyage.skipper_voyages(hot_user)
+
+		if params[:vessel_id]
+			vessel = Vessel.find_by(id: params[:vessel_id])
+			@voyages = Voyage.vessel_voyages(vessel)
+		else
+			@voyages = Voyage.skipper_voyages(hot_user)
+		end
   end
 
 	def destroy

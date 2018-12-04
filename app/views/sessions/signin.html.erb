@@ -4,8 +4,10 @@
 <% end %>
 
 <%= form_for :user, url: '/signin' do |f| %>
-	Username: <%= f.select :name, User.all.collect { |u| u.name } %><br></br>
+	Username: <%= f.select :name, User.all_users.collect { |u| u.name } %><br></br>
   Password: <%= f.password_field :password, value: 'password' %><br></br>
 
   <%= f.submit "Sign In" %>
 <% end %>
+<br></br>
+<%= link_to('Log in with Facebook!', '/auth/facebook') %>

@@ -15,4 +15,8 @@ class Voyage < ApplicationRecord
   def valid_voyage?(user)
     skipper_id == user.id if user
   end
+
+	def self.vessel_voyages(vessel)
+		self.where(vessel_id: vessel.id).order(voyage_date: :asc)
+	end
 end
