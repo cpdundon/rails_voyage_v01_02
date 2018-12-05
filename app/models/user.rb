@@ -24,4 +24,8 @@ class User < ApplicationRecord
 	def self.all_users
 		self.order(name: :asc)
 	end
+	
+	def self.all_pwd_users
+		self.where(uid: nil).order(name: :asc)
+	end
 end

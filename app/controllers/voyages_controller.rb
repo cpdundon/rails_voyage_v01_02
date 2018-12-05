@@ -21,6 +21,7 @@ class VoyagesController < ApplicationController
 
   def edit
     @voyage = Voyage.find_by(id: params[:id])
+		@vessel = @voyage.vessel
   end
 
   def update

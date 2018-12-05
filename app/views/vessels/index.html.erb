@@ -3,7 +3,9 @@
 <ul>
 	<% @vessels.each do |vessel| %>
 		<li>
-			<%= link_to vessel.name, edit_vessel_path(vessel) %>
+			<%= link_to "Edit #{vessel.name}", edit_vessel_path(vessel) %>
+			<%= ' | ' %>
+			<%= link_to "Show #{vessel.name}", vessel_path(vessel) %>
 			<%= ' | ' %>
 			<%= link_to "Voyages for this Vessel", vessel_voyages_path(vessel) %>
 			<%= ' | ' %>

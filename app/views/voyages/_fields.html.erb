@@ -4,7 +4,7 @@
   Crew: <%= f.text_field :crew %><br></br>
   Damage Report: <%= f.text_field :damage_report %><br></br>
 	Vessel Select: <br></br>
-	<%= f.select :vessel_id, Vessel.all.collect { |p| [ p.name, p.id ] }, {selected: (vessel ? vessel.id : nil), include_blank: false}, {multiple: false} %><br></br> 
+	<%= f.select :vessel_id, Vessel.all_active_vessels.collect { |p| [ p.name, p.id ] }, {selected: (vessel ? vessel.id : nil), include_blank: false}, {multiple: false} %><br></br> 
 	<%= f.submit %>
 <% end %>
 

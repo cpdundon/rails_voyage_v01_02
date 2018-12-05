@@ -4,7 +4,7 @@
 <% end %>
 
 <%= form_for :user, url: '/signin' do |f| %>
-	Username: <%= f.select :name, User.all_users.collect { |u| u.name } %><br></br>
+	Username: <%= f.select :name, User.all_pwd_users.collect { |u| u.name } %><br></br>
   Password: <%= f.password_field :password, value: 'password' %><br></br>
 
   <%= f.submit "Sign In" %>

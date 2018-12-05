@@ -31,7 +31,7 @@ class VesselsController < ApplicationController
   end
 
   def index
-    @vessels = Vessel.all
+    @vessels = Vessel.all_vessels
   end
 
 private
