@@ -9,7 +9,6 @@ class User < ApplicationRecord
 	validates :name, uniqueness: { case_sensitive: false }
 
   after_create :assign_default_role
-#	after_create :balance_login_info
 
 	def balance_login_info
 		if email
