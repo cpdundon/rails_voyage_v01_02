@@ -32,3 +32,6 @@
 
 # Ignore special environment vars file
 /.env
+
+# Ignore swap files
+*.swp
