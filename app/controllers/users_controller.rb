@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :require_admin
+	before_action :require_admin, except: [:new_outside, :create]
 
   def show
     @user = User.find_by(id: params[:id])
@@ -8,8 +8,16 @@ class UsersController < ApplicationController
     render 'show.html.erb'
   end
 
+	def new_outside
+		@user = User.new
+		@outside = true
+	
+		render 'new.html.erb'
+	end
+
   def new
     @user = User.new
+		@outside = false
   end
 
   def create

@@ -7,7 +7,9 @@
   Password: <%= f.password_field :password %><br></br>
 	Role Select: Use your Control Key to select multiple roles<br></br>
 	<%= f.select :role_ids, Role.all.collect { |p| [ p.name, p.id ] }, {include_blank: false}, {multiple: true} %><br></br> 
-  Active? <%= f.check_box :active, checked: user.new_record? || f.object.active? %><br></br>
+	<% if !outside %>
+		Active? <%= f.check_box :active, checked: user.new_record? || f.object.active? %><br></br>
+	<% end %>
 	<%= f.submit %>
 <% end %>
 
