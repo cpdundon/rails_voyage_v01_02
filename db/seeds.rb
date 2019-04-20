@@ -13,7 +13,6 @@ user = User.create()
 end
 user.destroy
 
-# Test Comment
 # Generate one admin so the things start off on the right foot.
 role_id = Role.find_by(name: :admin).id
 User.create({name: :admin, active: :true, password: :cpdundon, role_ids: role_id})
