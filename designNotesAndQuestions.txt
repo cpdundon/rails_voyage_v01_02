@@ -1,0 +1,19 @@
+Hi Dalia,
+
+Voyage tracker is designed to track voyages (trips) on a fleet of boats (vessles).  It has 3 main tables.  Voyages, Vessles, and a join table in the middle with crew records.  Vessles have many Voyages...  I plan to modify the Vessle side of the application for this exercise.
+
+Page by page design:
+.../vessels/# (Show Vessel) via JSON
+.../vessels (Index) via JSON
+Vessel has_many Voyages via JSON - tack the voyages on to the index entry for a vessel on the .../vessles (index) url.
+Submit form ...vessles/new via ajax.  
+
+General Questions:
+I plan to close the loop so that if I am on .../vessels/# (show) and the user transitions to .../vessles (index) then there will be NO page reload.  If the user goes from .../vessles (index) to .../vessles/# () show then there will be NO page reload.  Is this an approved approach?
+
+Vessel has_many Voyages via JSON is further detail on a vessel.  I plan to display this detail on the .../vessles (index) page "attached" to a particular vessel as an <ol>...</ol>.  Does this sound good?
+
+Submitting the form.  This is the last thing I plan to do and I have not spent much time on it yet.  More to come there.  Please let me know what you think about the above.
+
+Many thanks,
+-- Chris
