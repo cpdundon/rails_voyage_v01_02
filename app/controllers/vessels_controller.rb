@@ -4,7 +4,12 @@ class VesselsController < ApplicationController
 
   def show
     @vessel = Vessel.find_by(id: params[:id])
-  end
+  
+    respond_to do |format|
+			format.json {render json: @vessel}
+			format.html {render :show}
+		end
+	end
 
   def new
     @vessel = Vessel.new
