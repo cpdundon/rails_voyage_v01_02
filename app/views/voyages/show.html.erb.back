@@ -1,0 +1,15 @@
+<h1>Skipper: <%= @voyage.skipper.name %></h1>
+Voyage Date: <%= @voyage.voyage_date %><br></br>
+Vessel: <%= @voyage.vessel.name %><br></br>
+Crew:
+<p><%= @voyage.crew %></p>
+Damage Report:
+<p><%= @voyage.damage_report %></p>
+
+<%= link_to "New Voyage", new_voyage_path %> | 
+<%= link_to "Edit Voyage", edit_voyage_path(@voyage) %> | 
+<%= link_to "Voyage List",  voyages_path %>
+<br></br>
+<%= form_for @voyage, method: :delete do |f| %>
+	<%= f.submit "Delete" %>
+<% end %>
