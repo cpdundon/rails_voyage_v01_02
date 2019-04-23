@@ -17,3 +17,10 @@ Submitting the form.  This is the last thing I plan to do and I have not spent m
 
 Many thanks,
 -- Chris
+
+Good advice in reply from Dalia on 4/22/2019:
+
+"Hi Chris - the navigation from show to index sounds fine, though really won’t have much bearing on requirements. All that is needed for the show requirement is for you to make a get request that retrieves 1 item and displays it to the page using AJAX, etc.
+The has_many also sounds fine. You could also display has_many data when you do the rendering of the show resource. That is up to you."
+
+I plan to simplify the navigation per Dalia's suggestion.  I also plan to display the has_many on the show page.
