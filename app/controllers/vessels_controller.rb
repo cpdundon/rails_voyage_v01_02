@@ -37,6 +37,11 @@ class VesselsController < ApplicationController
 
   def index
     @vessels = Vessel.all_vessels
+    
+		respond_to do |format|
+			format.json {render json: @vessels}
+			format.html {render :index}
+		end
   end
 
 private

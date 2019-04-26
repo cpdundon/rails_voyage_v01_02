@@ -1,7 +1,10 @@
 <h1>Vessel: <span id="vessel_name"></span></h1>
 <p>
-	Active? -- <%= @vessel.active ? 'Yes' : 'No' %>
+	Active? -- <span id="vessel_active"></span>
 </p>
+<h2>Voyage by date and skipper:</h2>
+<ol id="vessel_voyages"></ol>
+
 <%= link_to "New Vessel", new_vessel_path %> | 
 <%= link_to "Edit Vessel", edit_vessel_path(@vessel) %> | 
 <%= link_to "Vessels List",  vessels_path %> |

@@ -1,19 +1,8 @@
-//Code for the Vessel Show Page
-$(document).ready(function () {
-//	let game = new Game(-1);
-//	game.attachListeners();
-
-	let urlSplit = window.location.href.split('/'); 
-	$('#vessel_name')[0].innerText = "ID => " + urlSplit[urlSplit.length - 1];
-
-	let jsonUrl = window.location.href + '.json';
-
-	console.log(jsonUrl);
-});
-
 class VesselShow {
 	constructor () {
+		this.busy = false;
 	}
+
 
 	href () {
 		return window.location.href;
@@ -21,10 +10,10 @@ class VesselShow {
 
 	id () {
 		let urlSplit = this.href().split('/');
-		let id = urlSplit[urlSplit.length - 1];
+		let idStr = urlSplit[urlSplit.length - 1];
 
-		if Number.isInteger(parseInt(id)) {
-			return id;
+		if (Number.isInteger(parseInt(idStr))) {
+			return idStr;
 		}
 		return "";
 	}
@@ -35,11 +24,31 @@ class VesselShow {
 
 	isVesselShowPage () {
 		const hrefSplit = this.href().split('/');	
-		return this.id() !== "" && hrefSplit[hrefSplit.length - 2] === "vessels";
+		return this.id() !== "" && hrefSplit[hrefSplit.length - 2] === "vessels" && hrefSplit.length === 5;
 	}
 
-	attachListeners () {
-		
+	populate () {
+		$.ajax({
+			type: 'GET',
+			url: this.hrefJson(),
+			processData: true,
+			contentType: 'application/json',
+			}).done(( data ) => {
+				$('#vessel_name')[0].innerText = data.name;				
+				const activeText = data.active ? 'Yes' : 'No';
+				$('#vessel_active')[0].innerText = activeText; 
+				const voyageHTML = this.voyageList(data.voyages);
+				$('#vessel_voyages')[0].innerHTML = voyageHTML;
+		});
+	}
+	
+	voyageList (voyages) {
+		voyages.sort(function(a, b) {return new Date(b.voyage_date) - new Date(a.voyage_date);});
+		return voyages.map((el) => {return this.oneVoyage(el);}).join("");
+	}
+
+	oneVoyage (dataLineItm) {
+		return '<li> - ' + dataLineItm.voyage_date + ' - ' + dataLineItm.skipper.name + '</li>';
 	}
 
 }

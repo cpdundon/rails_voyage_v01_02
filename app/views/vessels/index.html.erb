@@ -1,16 +1,4 @@
 <h1>Vessel Index</h1>
 <%= link_to "New Vessel", new_vessel_path %>
-<ul>
-	<% @vessels.each do |vessel| %>
-		<li>
-			<%= link_to "Edit #{vessel.name}", edit_vessel_path(vessel) %>
-			<%= ' | ' %>
-			<%= link_to "Show #{vessel.name}", vessel_path(vessel) %>
-			<%= ' | ' %>
-			<%= link_to "Voyages for this Vessel", vessel_voyages_path(vessel) %>
-			<%= ' | ' %>
-			<%= link_to "New Vessel Voyage", new_vessel_voyage_path(vessel) %>
-		</li>
-	<% end %>
-</ul>
-
+<ol id="vessel_list">
+</ol>
