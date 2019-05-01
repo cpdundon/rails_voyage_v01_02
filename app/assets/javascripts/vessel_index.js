@@ -17,6 +17,15 @@ class VesselIndex {
 		return hrefSplit[hrefSplit.length - 1] === "vessels" && hrefSplit.length === 4;
 	}
 
+	addStructure (vesselList) {
+		const structureStr = `<h1>Vessel Index</h1>
+			<a href="/vessels/new">New Vessel</a>
+			<ol id="vessel_list">${vesselList}
+			</ol>`;
+
+		return structureStr;
+	}
+
 	populate () {
 		$.ajax({
 			type: 'GET',
@@ -24,9 +33,8 @@ class VesselIndex {
 			processData: true,
 			contentType: 'application/json',
 			}).done(( data ) => {
-				console.log(data);
 				const vesselHTML = this.vesselList(data);
-				$('#vessel_list')[0].innerHTML = vesselHTML;
+				$('#jquery_hook')[0].innerHTML = this.addStructure(vesselHTML);
 		});
 	}
 	
@@ -35,7 +43,7 @@ class VesselIndex {
 	}
 
 	oneVessel (dataLineItm) {
-		return '<li> - ' + dataLineItm.name + '</li>';
+		return `<li> - <a class="show" href="/vessels/${dataLineItm.id}">${dataLineItm.name}</a></li>`;
 	}
 
 }
