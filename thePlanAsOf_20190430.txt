@@ -1,0 +1,5 @@
+1. Get application.html.erb up and running properly (considering existing infrastructure)
+2. Get page loads from page load/reload up and running - js for vessel index / vessel show.
+3. Attach event handler to Click & <a>.  Use target url to determine if you need to e.preventDefault()
+4. If e.perventDefault is necessary, paint the screen using js.  Otherwise let rails work its magic.
+5. Architect the js form submit for vessel new.
