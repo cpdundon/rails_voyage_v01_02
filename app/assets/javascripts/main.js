@@ -1,7 +1,8 @@
-let vesselShow;
-let vesselIndex;
 
 $(document).ready(function () {
+	let vesselShow;
+	let vesselIndex;
+	
 	if (vesselShow === undefined) { vesselShow = new VesselShow(); }
 	if (vesselIndex === undefined) { vesselIndex = new VesselIndex(); }
 
