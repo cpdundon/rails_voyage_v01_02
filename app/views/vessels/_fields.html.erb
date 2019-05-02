@@ -1,4 +1,5 @@
-<%= form_for vessel do |f| %>
+<% id_text = vessel.new_record? ? "vessel_new" : "vessel_edit" %>
+<%= form_for vessel, html: {id: id_text} do |f| %>
 	<%= link_to "Vessels List",  vessels_path %><br></br>
 	Vessel Name: <%= f.text_field :name %><br></br>
   Active? <%= f.check_box :active, checked: vessel.new_record? || f.object.active? %><br></br>

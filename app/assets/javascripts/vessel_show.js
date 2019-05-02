@@ -79,7 +79,11 @@ class VesselShow {
 	}
 
 	navLinks () {
-		return `${this.newVesselLink()} | ${this.editVesselLink()} | ${this.listVesselsLink()}`;
+		return `${this.newVesselLink()} | ${this.editVesselLink()} | ${this.listVesselsLink()} | ${this.newVesselVoyageLink()}`;
+	}
+
+	newVesselVoyageLink () {
+		return this.oneLink("Vessel Voyage", `/vessels/${this.id}/voyages/new`,"new-voyage");
 	}
 	
 	listVesselsLink () {

@@ -1,11 +1,8 @@
 
 $(document).ready(function () {
-	let vesselShow;
-	let vesselIndex;
+	let vesselShow = new VesselShow();
+	let vesselIndex = new VesselIndex();
 	
-	if (vesselShow === undefined) { vesselShow = new VesselShow(); }
-	if (vesselIndex === undefined) { vesselIndex = new VesselIndex(); }
-
 	if (vesselShow.isVesselShowPage()) {
 		vesselShow.populate(vesselShow.href());
 	}
@@ -32,6 +29,16 @@ $(document).ready(function () {
 		
 		e.preventDefault();
 		return false;
+	});
+
+	$(document).on('submit', '#vessel_new', e => {
+		const formInfo = $(e.target).serialize();
+		const url = window.location.origin + '/vessels'
+		const newVessel = new VesselNew(formInfo);
+		const retInfo = newVessel.submit(url);
+debugger;
+		console.log(retInfo);
+		e.preventDefault();
 	});
 
 });
