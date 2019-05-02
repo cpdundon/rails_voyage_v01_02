@@ -1,6 +1,7 @@
 class VesselShow {
 	constructor () {
 		this.busy = false;
+		this.id = -1;
 	}
 
 
@@ -8,10 +9,17 @@ class VesselShow {
 		return window.location.href;
 	}
 
-	id () {
-		let urlSplit = this.href().split('/');
-		let idStr = urlSplit[urlSplit.length - 1];
+	id_url (url = "") {
+		let hrefSplit = [];
 
+		if (url === "") {
+			hrefSplit = this.href().split('/');	
+		} else {
+			hrefSplit = url.split('/');
+		}
+	
+		const idStr = hrefSplit[hrefSplit.length - 1];
+	
 		if (Number.isInteger(parseInt(idStr))) {
 			return idStr;
 		}
@@ -22,9 +30,16 @@ class VesselShow {
 		return this.href() + '.json';
 	}
 
-	isVesselShowPage () {
-		const hrefSplit = this.href().split('/');	
-		return this.id() !== "" && hrefSplit[hrefSplit.length - 2] === "vessels" && hrefSplit.length === 5;
+	isVesselShowPage (url = "") {	
+		const id = this.id;
+		let hrefSplit = [];
+
+		if (url === "") {
+			hrefSplit = this.href().split('/');	
+		} else {
+			hrefSplit = url.split('/');
+		}
+		return this.id_url(url) !== "" && hrefSplit[hrefSplit.length - 2] === "vessels" && hrefSplit.length === 5;
 	}
 
 	structureStr (vessel) {
@@ -36,13 +51,16 @@ class VesselShow {
 		return structure;
 	}
 
-	populate () {
+	populate (url) {
+		url = url + '.json';
+
 		$.ajax({
 			type: 'GET',
-			url: this.hrefJson(),
+			url: url, //this.hrefJson(),
 			processData: true,
 			contentType: 'application/json',
 			}).done(( data ) => {
+				this.id = data.id;
 				$('#jquery_hook')[0].innerHTML = this.structureStr(data);				
 				const voyageHTML = this.voyageList(data.voyages);
 				$('#vessel_voyages')[0].innerHTML = voyageHTML;

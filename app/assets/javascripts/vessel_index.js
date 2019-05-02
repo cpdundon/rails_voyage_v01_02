@@ -12,8 +12,15 @@ class VesselIndex {
 		return this.href() + '.json';
 	}
 
-	isVesselIndexPage () {
-		const hrefSplit = this.href().split('/');	
+	isVesselIndexPage (url = "") {
+		let hrefSplit = [];
+
+		if (url === "") {
+			hrefSplit = this.href().split('/');
+		} else {
+			hrefSplit = url.split('/');
+		}
+
 		return hrefSplit[hrefSplit.length - 1] === "vessels" && hrefSplit.length === 4;
 	}
 
@@ -26,10 +33,16 @@ class VesselIndex {
 		return structureStr;
 	}
 
-	populate () {
+	populate (url = "") {
+		if (url === "") {
+			url = this.href();
+		}
+
+		url += '.json';
+
 		$.ajax({
 			type: 'GET',
-			url: this.hrefJson(),
+			url: url, //this.hrefJson(),
 			processData: true,
 			contentType: 'application/json',
 			}).done(( data ) => {

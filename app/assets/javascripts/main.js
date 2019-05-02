@@ -6,28 +6,31 @@ $(document).ready(function () {
 	if (vesselIndex === undefined) { vesselIndex = new VesselIndex(); }
 
 	if (vesselShow.isVesselShowPage()) {
-		vesselShow.populate();
+		vesselShow.populate(vesselShow.href());
 	}
 		
 	if (vesselIndex.isVesselIndexPage()) {
 		vesselIndex.populate();
 	}
+	
+	$(document).on("click", "a", (e) => {
+		const url = e.target.href;
 
-return false;
+		if (vesselIndex.isVesselIndexPage(url)) {
+			history.pushState(null, null, url);	
+			vesselIndex.populate(url);
 
-	$(document).bind('DOMSubtreeModified', function (e) {
-		if (vesselShow.busy) {
-			return false;
-		} 
-		debugger;		
-		vesselShow.busy = true;
+		} else if (vesselShow.isVesselShowPage(url)) {
+			history.pushState(null, null, url);	
+			vesselShow.populate(url);
 
-		if (vesselShow.isVesselShowPage()) {
-			vesselShow.populate();
+		} else {
+			//do nothing
+			return true;
 		}
 		
-		vesselShow.busy = false;	
-		return true;
+		e.preventDefault();
+		return false;
 	});
 
 });
