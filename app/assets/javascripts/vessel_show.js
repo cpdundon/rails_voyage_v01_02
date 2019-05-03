@@ -1,6 +1,6 @@
 class VesselShow {
 	constructor () {
-		this.busy = false;
+//		this.busy = false;
 		this.id = -1;
 	}
 
@@ -56,11 +56,11 @@ class VesselShow {
 
 		$.ajax({
 			type: 'GET',
-			url: url, //this.hrefJson(),
+			url: url,
 			processData: true,
 			contentType: 'application/json',
 			}).done(( data ) => {
-				this.id = data.id;
+				this.id = data.id;	//NOTE: this.id is set HERE.
 				$('#jquery_hook')[0].innerHTML = this.structureStr(data);				
 				const voyageHTML = this.voyageList(data.voyages);
 				$('#vessel_voyages')[0].innerHTML = voyageHTML;

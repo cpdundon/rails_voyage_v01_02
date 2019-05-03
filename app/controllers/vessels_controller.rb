@@ -18,8 +18,6 @@ class VesselsController < ApplicationController
   def create
     vessel = Vessel.create(vessel_params)
 		render json: vessel
-    
-		#redirect_to vessel_path(vessel)
   end
 
   def edit

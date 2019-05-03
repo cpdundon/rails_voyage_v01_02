@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 	let vesselShow = new VesselShow();
 	let vesselIndex = new VesselIndex();
@@ -35,11 +34,8 @@ $(document).ready(function () {
 		const formInfo = $(e.target).serialize();
 		const url = window.location.origin + '/vessels'
 		const newVessel = new VesselNew(formInfo);
-		const retInfo = newVessel.submit(url);
-debugger;
-		console.log(retInfo);
+		newVessel.submit(url);
 		e.preventDefault();
 	});
 
 });
-

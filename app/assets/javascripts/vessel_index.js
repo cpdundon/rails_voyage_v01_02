@@ -1,8 +1,5 @@
 class VesselIndex {
-	constructor () {
-		this.busy = false;
-	}
-
+	constructor () {}
 
 	href () {
 		return window.location.href;
@@ -42,7 +39,7 @@ class VesselIndex {
 
 		$.ajax({
 			type: 'GET',
-			url: url, //this.hrefJson(),
+			url: url,
 			processData: true,
 			contentType: 'application/json',
 			}).done(( data ) => {
