@@ -30,6 +30,10 @@ $(document).ready(function () {
 		return false;
 	});
 
+	$(document).on('click', "button#index_invert", () => {
+		vesselIndex.invertVesselList();
+	});
+
 	$(document).on('submit', '#vessel_new', e => {
 		const formInfo = $(e.target).serialize();
 		const url = window.location.origin + '/vessels'
